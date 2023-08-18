@@ -121,7 +121,8 @@ function showStats(data) {
                     let assetSize = (asset.size / 1048576.0).toFixed(2);
                     let lastUpdate = asset.updated_at.split("T")[0];
 
-                    downloadInfoHTML += "<li><code>" + asset.name + "</code> (" + assetSize + "&nbsp;MiB) - " +
+                    downloadInfoHTML += "<li><code>" + asset.name + "</code> <a href='" + 
+                    asset.browser_download_url + "'>(" + assetSize + "&nbsp;MiB)</a> - " +
                         "downloaded " + formatNumber(asset.download_count) + "&nbsp;times. " +
                         "Last&nbsp;updated&nbsp;on&nbsp;" + lastUpdate + "</li>";
 
