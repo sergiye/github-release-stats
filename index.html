@@ -11,36 +11,9 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href=".">
-                    <span class="glyphicon glyphicon-stats"></span>&nbsp;
-                    Github Release Stats
-                </a>
-            </div>
-            <div class="collapse navbar-collapse" id="main-navbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="https://github.com/sergiye/github-release-stats" target="_blank">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;
-                            View project on Github
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     <div class="container">
         <div class="row" id="search">
             <div class="col-md-4 col-md-offset-4">
-                <h2>Enter project details...</h2>
                 <div class="form form-inline">
                     <div class="form-group">
                         <input type="text" class="form-control" id="username" placeholder="Github username">
@@ -53,7 +26,8 @@
             </div>
         </div>
         <div class="row" id="description">
-            <h2>...and get the latest release stats like download counts, release dates, authors for any Github project.</h2>
+            <h2>Enter project details</h2>
+            <h3>and get the latest release stats like download counts, release dates, authors for any Github project.</h3>
         </div>
         <div class="row" id="title">
             <h2><span class="username"></span>/<span class="repository"></span></h2>
@@ -85,10 +59,19 @@
         </div>
     </div>
     <div id="footer">
-        <div class="container">
-            Made with <span class="glyphicon glyphicon-heart"></span> by <a href="https://github.com/sergiye/github-release-stats" target="_blank">Sergiye</a>
+        <div class="container-fluid">
+	        <div class="container">
+	            Made with <span class="glyphicon glyphicon-heart"></span> by <a href="mailto:egoshin.sergey@gmail.com" target="_blank">Sergiye</a>
+	        </div>
+	        <div class="container">
+	            <a href="https://github.com/sergiye/github-release-stats" target="_blank">
+	                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;
+	                View project on Github
+	            </a>
+	        </div>
         </div>
     </div>
+
 </body>
 <script type="text/javascript" src="third-party/jquery/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="third-party/bootstrap/js/bootstrap.min.js"></script>
