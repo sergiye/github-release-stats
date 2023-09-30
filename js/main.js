@@ -166,8 +166,8 @@ function showStats(data) {
 		    let url = "https://github.com/" + $("#username").val() + "/" + $("#repository").val() + "/releases";
 
             let totalHTML = "<div class='row total-downloads'>";
-            totalHTML += "<h1><span class='glyphicon glyphicon-download'></span>&nbsp;&nbsp;Total Downloads</h1>";
-            totalHTML += "<span><a href='" + url + "' target='_blank'>" + formatNumber(totalDownloadCount) + "</a></span>";
+            totalHTML += "<h1><span class='glyphicon glyphicon-download'></span>&nbsp;&nbsp;<a href='" + url + "' target='_blank'>Total Downloads</a></h1>";
+            totalHTML += "<span>" + formatNumber(totalDownloadCount) + "</span>";
             totalHTML += "</div>";
 
             html = totalHTML + html;
