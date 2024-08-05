@@ -124,7 +124,7 @@ function showStats(data) {
                     downloadInfoHTML += "<li><code>" + asset.name + "</code> <a href='" + 
                     asset.browser_download_url + "'>(" + assetSize + "&nbsp;MiB)</a> - " +
                         "downloaded " + formatNumber(asset.download_count) + "&nbsp;times. " +
-                        "Last&nbsp;updated&nbsp;on&nbsp;" + lastUpdate + "</li>";
+                        "Updated&nbsp;" + lastUpdate + "</li>";
 
                     totalDownloadCount += asset.download_count;
                     releaseDownloadCount += asset.download_count;
