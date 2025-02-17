@@ -100,6 +100,7 @@ function showStats(data) {
             let releaseDownloadCount = 0;
             let releaseAuthor = item.author;
             let publishDate = item.published_at.split("T")[0];
+            let comment = item.body;
 
             if(isPreRelease) {
                 releaseBadge = "&nbsp;&nbsp;<span class='badge'>Pre-release</span>";
@@ -142,19 +143,23 @@ function showStats(data) {
 
             html += "<ul>";
 
-            if (releaseAuthor) {
-                html += "<li><span class='glyphicon glyphicon-user'></span>&nbsp;&nbsp;" +
-                    "Author: <a href='" + releaseAuthor.html_url + "'>@" + releaseAuthor.login  +"</a></li>";
-            }
-
-            html += "<li><span class='glyphicon glyphicon-calendar'></span>&nbsp;&nbsp;" +
-                "Published: " + publishDate + "</li>";
-
             if(releaseDownloadCount) {
                 html += "<li><span class='glyphicon glyphicon-download'></span>&nbsp;&nbsp;" +
                     "Downloads: " + formatNumber(releaseDownloadCount) + "</li>";
             }
 
+            html += "<li><span class='glyphicon glyphicon-calendar'></span>&nbsp;&nbsp;" +
+                "Published: " + publishDate;
+            if (releaseAuthor) {
+                html += "&nbsp; by <a href='" + releaseAuthor.html_url + "'>@" + releaseAuthor.login  +"</a>";
+            }
+            html += "</li>";
+    
+            if(comment) {
+                html += "<li><span class='glyphicon glyphicon-comment'></span>&nbsp;&nbsp;" +
+                "Comment: <pre>" + comment + "</pre></li>";
+            }
+            
             html += "</ul>";
 
             html += downloadInfoHTML;
