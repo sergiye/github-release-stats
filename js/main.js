@@ -84,9 +84,9 @@ function showStats(data) {
     let html = "";
 
     if(err) {
-        html += "<div class='col-md-6 col-md-offset-3 alert alert-danger output'>" + errMessage + "</div>";
+        html += "<div class='col-md-7 col-md-offset-3 alert alert-danger output'>" + errMessage + "</div>";
     } else {
-        html += "<div class='col-md-6 col-md-offset-3 output'>";
+        html += "<div class='col-md-7 col-md-offset-3 output'>";
 
         let isLatestRelease = getQueryVariable("page") == 1 ? true : false;
         let totalDownloadCount = 0;
