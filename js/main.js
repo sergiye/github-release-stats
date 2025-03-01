@@ -156,8 +156,7 @@ function showStats(data) {
             html += "</li>";
     
             if(comment) {
-                html += "<li><span class='glyphicon glyphicon-comment'></span>&nbsp;&nbsp;" +
-                "Comment: <pre>" + comment + "</pre></li>";
+                html += "<li><details><summary><span class='glyphicon glyphicon-comment'></span>&nbsp;&nbsp;Details</summary><pre>" + comment + "</pre></details></li>";
             }
             
             html += "</ul>";
