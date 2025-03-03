@@ -40,7 +40,9 @@ code {
     font-size: 18px;
     margin-right: 10px;
 }
-
+summary{
+    cursor: pointer;
+}
 .release {
     background-color: rgba(127, 140, 141, 0.1);
     border: solid 1px rgba(127, 140, 141, 0.4);
