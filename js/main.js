@@ -132,12 +132,15 @@ function showStats(data) {
                 });
             }
 
-            html += "<div class='row " + releaseClassNames + "'>";
+            html += "<div class='row " + releaseClassNames + "'><details>";
 
-            html += "<h3><span class='glyphicon glyphicon-tag'></span>&nbsp;&nbsp;" +
-                "<a href='" + releaseURL + "' target='_blank'>" + releaseTag + "</a>" +
-                releaseBadge + "</h3>" + "<hr class='release-hr'>";
-
+            html += "<summary><h3><span class='glyphicon glyphicon-tag'></span>&nbsp;&nbsp;" +
+                "<a href='" + releaseURL + "' target='_blank'>" + releaseTag + "</a>" + releaseBadge;
+            if(releaseDownloadCount) {
+                html += "&nbsp;&nbsp;<small>Downloads: " + formatNumber(releaseDownloadCount) + "</small>";
+            }
+            html += "</h3></summary>";
+            html += "<hr class='release-hr'>";
             html += "<h4><span class='glyphicon glyphicon-info-sign'></span>&nbsp;&nbsp;" +
                 "Release Info</h4>";
 
@@ -163,7 +166,7 @@ function showStats(data) {
 
             html += downloadInfoHTML;
 
-            html += "</div>";
+            html += "</details></div>";
         });
 
         if(totalDownloadCount) {
