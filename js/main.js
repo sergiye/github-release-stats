@@ -116,20 +116,22 @@ function showStats(data) {
                 downloadInfoHTML += "<h4><span class='glyphicon glyphicon-download'></span>&nbsp;&nbsp;" +
                     "Download Info</h4>";
 
-                downloadInfoHTML += "<ul>";
+                downloadInfoHTML += "<table class='table table-hover table-sm'><thead><tr'><th>Asset</th><th style='min-width: 70px; width: 100px;'>Downloads</th><th style='min-width: 80px; width: 100px;'>Link</th><th style='min-width: 90px; width: 100px;'>Updated</th></tr></thead><tbody>";
 
                 $.each(releaseAssets, function(index, asset) {
                     let assetSize = (asset.size / 1048576.0).toFixed(2);
                     let lastUpdate = asset.updated_at.split("T")[0];
 
-                    downloadInfoHTML += "<li><code>" + asset.name + "</code> <a href='" + 
-                    asset.browser_download_url + "'>(" + assetSize + "&nbsp;MiB)</a> - " +
-                        "downloaded " + formatNumber(asset.download_count) + "&nbsp;times. " +
-                        "Updated&nbsp;" + lastUpdate + "</li>";
+                    downloadInfoHTML += "<tr><td>" + asset.name + "</td><td>" +
+                        " " + formatNumber(asset.download_count) + "</td><td><a href='" + 
+                        asset.browser_download_url + "'>(" + assetSize + "&nbsp;MiB)</a></td><td>" +
+                        lastUpdate + "</td></tr>";
 
                     totalDownloadCount += asset.download_count;
                     releaseDownloadCount += asset.download_count;
                 });
+
+                downloadInfoHTML += "</tbody></table>";
             }
 
             html += "<div class='row " + releaseClassNames + "'><details>";
