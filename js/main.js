@@ -42,6 +42,7 @@ $("#username").keyup(function (event) {
 // Callback function for getting user repositories
 function getUserRepos() {
     let user = $("#username").val();
+    let repository = $("#repository").val();
 
     let autoComplete = $('#repository').typeahead({ 
         autoSelect: true,
@@ -55,6 +56,25 @@ function getUserRepos() {
     $.getJSON(url, function(data) {
         $.each(data, function(index, item) {
             repoNames.push(item.name);
+            if (item.name == repository){
+
+                let html = "<div class='row repo-stats'>";
+                html += "<h1><span class='glyphicon glyphicon-star'></span>&nbsp;&nbsp;<a href='" + item.stargazers_url + "' target='_blank'>Stargazers</a></h1>";
+                html += "<span>" + formatNumber(item.stargazers_count) + "</span>";
+                // html += "<h1><span class='glyphicon glyphicon-eye-open'></span>&nbsp;&nbsp;<a href='" + item.html_url + "' target='_blank'>Watchers</a></h1>";
+                // html += "<span>" + formatNumber(item.watchers_count) + "</span>";
+                html += "<h1><span class='glyphicon glyphicon-random'></span>&nbsp;&nbsp;<a href='" + item.forks_url + "' target='_blank'>Forks</a></h1>";
+                html += "<span>" + formatNumber(item.forks_count) + "</span>";
+                html += "<h1><span class='glyphicon glyphicon-bell'></span>&nbsp;&nbsp;<a href='" + item.html_url + "' target='_blank'>Open issues</a></h1>";
+                html += "<span>" + formatNumber(item.open_issues) + "</span>";
+                html += "</div>";
+
+                let repoDiv = $("#repo-result");
+                console.log(repoDiv);
+                repoDiv.hide();
+                repoDiv.html(html);
+                repoDiv.slideDown();
+            }
         });
     });
 

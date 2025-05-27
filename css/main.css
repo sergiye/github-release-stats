@@ -22,12 +22,22 @@ code {
 }
 
 #stats-result {
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .alert.output {
     font-size: 18px;
     text-align: center;
+}
+
+.repo-stats {
+    margin-top: 20px;
+    text-align: center;
+}
+.repo-stats h1 {
+    display: inline;
+    font-size: 14px;
+    margin: 10px;
 }
 
 .total-downloads {
@@ -37,7 +47,7 @@ code {
 
 .total-downloads h1 {
     display: inline;
-    font-size: 18px;
+    font-size: 16px;
     margin-right: 10px;
 }
 summary{
