@@ -59,13 +59,13 @@ function getUserRepos() {
             if (item.name == repository){
 
                 let html = "<div class='row repo-stats'>";
-                html += "<h1><span class='glyphicon glyphicon-star'></span>&nbsp;&nbsp;<a href='" + item.stargazers_url + "' target='_blank'>Stargazers</a></h1>";
+                html += "<h1><span class='glyphicon glyphicon-star'></span>&nbsp;&nbsp;<a href='" + item.html_url + "/stargazers' target='_blank'>Stargazers</a></h1>";
                 html += "<span>" + formatNumber(item.stargazers_count) + "</span>";
                 // html += "<h1><span class='glyphicon glyphicon-eye-open'></span>&nbsp;&nbsp;<a href='" + item.html_url + "' target='_blank'>Watchers</a></h1>";
                 // html += "<span>" + formatNumber(item.watchers_count) + "</span>";
-                html += "<h1><span class='glyphicon glyphicon-random'></span>&nbsp;&nbsp;<a href='" + item.forks_url + "' target='_blank'>Forks</a></h1>";
+                html += "<h1><span class='glyphicon glyphicon-random'></span>&nbsp;&nbsp;<a href='" + item.html_url + "/forks' target='_blank'>Forks</a></h1>";
                 html += "<span>" + formatNumber(item.forks_count) + "</span>";
-                html += "<h1><span class='glyphicon glyphicon-bell'></span>&nbsp;&nbsp;<a href='" + item.html_url + "' target='_blank'>Open issues</a></h1>";
+                html += "<h1><span class='glyphicon glyphicon-bell'></span>&nbsp;&nbsp;<a href='" + item.html_url + "/issues' target='_blank'>Open issues</a></h1>";
                 html += "<span>" + formatNumber(item.open_issues) + "</span>";
                 html += "</div>";
 
@@ -192,7 +192,7 @@ function showStats(data) {
         });
 
         if(totalDownloadCount) {
-		    let url = "https://github.com/" + $("#username").val() + "/" + $("#repository").val() + "/releases";
+		    let url = "https://github.com/" + $("#username").val() + "/" + $("#repository").val();
 
             let totalHTML = "<div class='row total-downloads'>";
             totalHTML += "<h1><span class='glyphicon glyphicon-download'></span>&nbsp;&nbsp;<a href='" + url + "' target='_blank'>Total Downloads</a></h1>";
