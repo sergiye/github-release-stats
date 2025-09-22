@@ -59,14 +59,10 @@ function getUserRepos() {
             if (item.name == repository){
 
                 let html = "<div class='row repo-stats'>";
-                html += "<h1><span class='glyphicon glyphicon-star'></span>&nbsp;&nbsp;<a href='" + item.html_url + "/stargazers' target='_blank'>Stargazers</a></h1>";
-                html += "<span>" + formatNumber(item.stargazers_count) + "</span>";
-                // html += "<h1><span class='glyphicon glyphicon-eye-open'></span>&nbsp;&nbsp;<a href='" + item.html_url + "' target='_blank'>Watchers</a></h1>";
-                // html += "<span>" + formatNumber(item.watchers_count) + "</span>";
-                html += "<h1><span class='glyphicon glyphicon-random'></span>&nbsp;&nbsp;<a href='" + item.html_url + "/forks' target='_blank'>Forks</a></h1>";
-                html += "<span>" + formatNumber(item.forks_count) + "</span>";
-                html += "<h1><span class='glyphicon glyphicon-bell'></span>&nbsp;&nbsp;<a href='" + item.html_url + "/issues' target='_blank'>Open issues</a></h1>";
-                html += "<span>" + formatNumber(item.open_issues) + "</span>";
+                html += "<h1><a href='" + item.html_url + "/stargazers' target='_blank'><span class='glyphicon glyphicon-star'></span>&nbsp;<span>" + formatNumber(item.stargazers_count) + "</span>&nbsp;Stargazers</a></h1>";
+                // html += "<h1><a href='" + item.html_url + "/watchers' target='_blank'><span class='glyphicon glyphicon-eye-open'></span>&nbsp;<span>" + formatNumber(item.watchers_count) + "</span>&nbsp;Watchers</a></h1>";
+                html += "<h1><a href='" + item.html_url + "/forks' target='_blank'><span class='glyphicon glyphicon-random'></span>&nbsp;<span>" + formatNumber(item.forks_count) + "</span>&nbsp;Forks</a></h1>";
+                html += "<h1><a href='" + item.html_url + "/issues' target='_blank'><span class='glyphicon glyphicon-bell'></span>&nbsp;<span>" + formatNumber(item.open_issues) + "</span>&nbsp;Open issues</a></h1>";
                 html += "</div>";
 
                 let repoDiv = $("#repo-result");
@@ -111,6 +107,7 @@ function showStats(data) {
         let isLatestRelease = getQueryVariable("page") == 1 ? true : false;
         let totalDownloadCount = 0;
         $.each(data, function(index, item) {
+            let releaseTitle = item.name;
             let releaseTag = item.tag_name;
             let releaseBadge = "";
             let releaseClassNames = "release";
@@ -157,14 +154,14 @@ function showStats(data) {
             html += "<div class='row " + releaseClassNames + "'><details>";
 
             html += "<summary><h3><span class='glyphicon glyphicon-tag'></span>&nbsp;&nbsp;" +
-                "<a href='" + releaseURL + "' target='_blank'>" + releaseTag + "</a>" + releaseBadge;
+                "<a href='" + releaseURL + "' target='_blank'>" + releaseTitle + "</a>" + releaseBadge;
             if(releaseDownloadCount) {
                 html += "&nbsp;&nbsp;<small>Downloads: " + formatNumber(releaseDownloadCount) + "</small>";
             }
             html += "</h3></summary>";
             html += "<hr class='release-hr'>";
-            html += "<h4><span class='glyphicon glyphicon-info-sign'></span>&nbsp;&nbsp;" +
-                "Release Info</h4>";
+            html += "<h4><span class='glyphicon glyphicon-info-sign'></span>&nbsp;&nbsp;" + releaseTag + 
+                " Release Info</h4>";
 
             html += "<ul>";
 
@@ -193,12 +190,7 @@ function showStats(data) {
 
         if(totalDownloadCount) {
 		    let url = "https://github.com/" + $("#username").val() + "/" + $("#repository").val();
-
-            let totalHTML = "<div class='row total-downloads'>";
-            totalHTML += "<h1><span class='glyphicon glyphicon-download'></span>&nbsp;&nbsp;<a href='" + url + "' target='_blank'>Total Downloads</a></h1>";
-            totalHTML += "<span>" + formatNumber(totalDownloadCount) + "</span>";
-            totalHTML += "</div>";
-
+            let totalHTML = "<div class='row total-downloads'><h1><a href='" + url + "/releases' target='_blank'><span class='glyphicon glyphicon-download'></span>&nbsp;<span>" + formatNumber(totalDownloadCount) + "</span>&nbsp;Total Downloads</a></h1></div>";
             html = totalHTML + html;
         }
 
