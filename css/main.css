@@ -39,6 +39,9 @@ code {
     font-size: 14px;
     margin: 10px;
 }
+.repo-stats h1 a {
+    color: black;
+}
 
 .total-downloads {
     margin-bottom: 25px;
@@ -49,6 +52,9 @@ code {
     display: inline;
     font-size: 16px;
     margin-right: 10px;
+}
+.total-downloads h1 a {
+    color: black;
 }
 summary{
     cursor: pointer;
