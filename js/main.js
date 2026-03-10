@@ -226,6 +226,8 @@ function redirect(page, perPage) {
 $(function() {
     $("#loader-gif").hide();
 
+    DarkReader.auto({ brightness: 100, contrast: 90, sepia: 10 });
+    
     validateInput();
     $("#username, #repository").keyup(validateInput);
 
