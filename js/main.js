@@ -222,6 +222,59 @@ function redirect(page, perPage) {
         ((getQueryVariable("search") == "0") ? "&search=0" : "");
 }
 
+async function fetchStars(owner, repo) {
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/stargazers?per_page=100`, {
+    headers: {
+      "Accept": "application/vnd.github.v3.star+json"
+    }
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to load data");
+  }
+
+  return res.json();
+}
+
+function renderStars(users, owner, repo) {
+  const avatarsEl = document.getElementById("avatars");
+  const textEl = document.getElementById("stars-text");
+
+  const latest = users.slice(-5).reverse();
+  const names = latest.map(u => '@' + u.user.login);
+
+  avatarsEl.innerHTML = latest.map(u =>
+    `<div class="avatar" style="background-image:url('${u.user.avatar_url}')"></div>`
+  ).join("");
+
+  const firstThree = names.slice(0, 3);
+  const othersCount = users.length - firstThree.length;
+
+  let text = "";
+  if (firstThree.length > 0) {
+    text = firstThree.join(", ");
+    if (othersCount > 0) {
+      text += ` and ${othersCount} others starred this repository`;
+    } else {
+      text += ` starred this repository`;
+    }
+  }
+  else {
+    text += `Nobody starred this repository yet...`;
+  }
+  
+  textEl.innerHTML = `<a href='https://github.com/${owner}/${repo}/stargazers' target='_blank'>${text}</a></h1>`;
+}
+
+async function initStars(owner, repo) {
+  try {
+    const data = await fetchStars(owner, repo);
+    data.sort((a, b) => new Date(a.starred_at) - new Date(b.starred_at));
+    renderStars(data, owner, repo);
+  } catch (e) {
+    document.getElementById("stars-text").textContent = e.message;
+  }
+}
 // The main function
 $(function() {
     $("#loader-gif").hide();
@@ -274,6 +327,7 @@ $(function() {
             $("#description").hide();
             $("#title").show();
         }
+        initStars(username, repository);
     } else {
         $("#username").focus();
     }

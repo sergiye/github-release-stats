@@ -184,3 +184,30 @@ body {
     width: 60px;
     margin-left: 5px;
 }
+
+.avatars {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #0d1117;
+    margin-left: -10px;
+    background-size: cover;
+    background-position: center;
+}
+
+.avatar:first-child {
+    margin-left: 0;
+}
+.stars-container {
+    text-align: center;
+}
+.stars-text {
+    font-size: 14px;
+    color: #58a6ff;
+}
