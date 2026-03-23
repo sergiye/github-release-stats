@@ -70,6 +70,8 @@ function getUserRepos() {
                 repoDiv.hide();
                 repoDiv.html(html);
                 repoDiv.slideDown();
+
+                initStars(user, repository, item);
             }
         });
     });
@@ -222,8 +224,17 @@ function redirect(page, perPage) {
         ((getQueryVariable("search") == "0") ? "&search=0" : "");
 }
 
-async function fetchStars(owner, repo) {
-  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/stargazers?per_page=100`, {
+async function fetchStars(owner, repo, item) {
+
+  const needUsers = 7;
+  let perPage = Math.min(20, item.stargazers_count);
+  let lastPage = Math.ceil(item.stargazers_count / perPage);
+  while (item.stargazers_count > needUsers && item.stargazers_count - (lastPage - 1) * perPage < needUsers){
+    perPage = perPage + needUsers;
+    lastPage = Math.ceil(item.stargazers_count / perPage);
+  }
+
+  let res = await fetch(`https://api.github.com/repos/${owner}/${repo}/stargazers?per_page=${perPage}&page=${lastPage}`, {
     headers: {
       "Accept": "application/vnd.github.v3.star+json"
     }
@@ -233,28 +244,27 @@ async function fetchStars(owner, repo) {
     throw new Error("Failed to load data");
   }
 
-  return res.json();
+  // return res.json();
+  const users = await res.json();
+  return users.slice(-needUsers).reverse();
 }
 
-function renderStars(users, owner, repo) {
+function renderStars(users, item) {
   const avatarsEl = document.getElementById("avatars");
   const textEl = document.getElementById("stars-text");
 
-  const latest = users.slice(-5).reverse();
-  const names = latest.map(u => '@' + u.user.login);
-
-  avatarsEl.innerHTML = latest.map(u =>
+  const names = users.map(u => '@' + u.user.login);
+  avatarsEl.innerHTML = users.map(u =>
     `<div class="avatar" style="background-image:url('${u.user.avatar_url}')"></div>`
   ).join("");
 
   const firstThree = names.slice(0, 3);
-  const othersCount = users.length - firstThree.length;
 
   let text = "";
   if (firstThree.length > 0) {
     text = firstThree.join(", ");
-    if (othersCount > 0) {
-      text += ` and ${othersCount} others starred this repository`;
+    if (item.stargazers_count > firstThree.length) {
+      text += ` and ${item.stargazers_count - 3} others starred this repository`;
     } else {
       text += ` starred this repository`;
     }
@@ -262,15 +272,15 @@ function renderStars(users, owner, repo) {
   else {
     text += `Nobody starred this repository yet...`;
   }
-  
-  textEl.innerHTML = `<a href='https://github.com/${owner}/${repo}/stargazers' target='_blank'>${text}</a></h1>`;
+
+  textEl.innerHTML = `<a href='${item.html_url}/stargazers' target='_blank'>${text}</a></h1>`;
 }
 
-async function initStars(owner, repo) {
+async function initStars(owner, repo, item) {
   try {
-    const data = await fetchStars(owner, repo);
-    data.sort((a, b) => new Date(a.starred_at) - new Date(b.starred_at));
-    renderStars(data, owner, repo);
+    const data = await fetchStars(owner, repo, item);
+    // data.sort((a, b) => new Date(a.starred_at) - new Date(b.starred_at));
+    renderStars(data, item);
   } catch (e) {
     document.getElementById("stars-text").textContent = e.message;
   }
@@ -327,7 +337,6 @@ $(function() {
             $("#description").hide();
             $("#title").show();
         }
-        initStars(username, repository);
     } else {
         $("#username").focus();
     }
