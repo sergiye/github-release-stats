@@ -255,7 +255,7 @@ function renderStars(users, item) {
 
   const names = users.map(u => '@' + u.user.login);
   avatarsEl.innerHTML = users.map(u =>
-    `<div class="avatar" style="background-image:url('${u.user.avatar_url}')"></div>`
+    `<div class="avatar" title="${u.user.login}" style="background-image:url('${u.user.avatar_url}')"></div>`
   ).join("");
 
   const firstThree = names.slice(0, 3);
