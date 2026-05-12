@@ -61,7 +61,7 @@ function getUserRepos() {
                 let html = "<div class='row repo-stats'>";
                 html += "<h1><a href='" + item.html_url + "/stargazers' target='_blank'><span class='glyphicon glyphicon-star'></span>&nbsp;<span>" + formatNumber(item.stargazers_count) + "</span>&nbsp;Stargazers</a></h1>";
                 // html += "<h1><a href='" + item.html_url + "/watchers' target='_blank'><span class='glyphicon glyphicon-eye-open'></span>&nbsp;<span>" + formatNumber(item.watchers_count) + "</span>&nbsp;Watchers</a></h1>";
-                html += "<h1><a href='" + item.html_url + "/forks' target='_blank'><span class='glyphicon glyphicon-random'></span>&nbsp;<span>" + formatNumber(item.forks_count) + "</span>&nbsp;Forks</a></h1>";
+                html += "<h1><a href='" + item.html_url + "/network/members' target='_blank'><span class='glyphicon glyphicon-random'></span>&nbsp;<span>" + formatNumber(item.forks_count) + "</span>&nbsp;Forks</a></h1>";
                 html += "<h1><a href='" + item.html_url + "/issues' target='_blank'><span class='glyphicon glyphicon-bell'></span>&nbsp;<span>" + formatNumber(item.open_issues) + "</span>&nbsp;Open issues</a></h1>";
                 html += "</div>";
 
